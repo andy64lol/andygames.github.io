@@ -133,18 +133,19 @@
                 background-position: 0 0;
             }
         }
-
-        audio {
-            display: none;
-        }
     </style>
 </head>
 <body>
-    <audio autoplay loop>
+    <audio id="background-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
     </audio>
 
     <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('background-music');
+            music.play();
+        });
+        
         function createBinaryRain() {
             const body = document.body;
             const chars = ['0', '1'];
@@ -172,93 +173,5 @@
     <button id="credits-button" class="small-button">Credits</button>
     <button id="discord-button" class="small-button">Join Discord Server</button>
     <button id="youtube-button" class="small-button">Visit YouTube Channel</button>
-
-    <div id="embed-container">
-        <embed id="scratch-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
-        <button id="back-button">Go Back</button>
-    </div>
-
-    <div id="credits-container">
-        <div class="credits-text">
-            Thanks to<br>
-            <strong>Creator & Webmaster:</strong> Andy64 / Andyutlb<br>
-            <strong>Game Development:</strong> All members of the Andygame Scratch Studio<br>
-            (too many to name individually - thank you all!)<br>
-            <strong>CSS Scripts:</strong> Unknown64<br>
-            <strong>JavaScript Scripts:</strong> Andy64 / Andyutlb, Unknown64, 4l3x64, Pixel8bit<br>
-            <strong>HTML Scripts:</strong> Andy64 / Andyutlb, Pixel8bit
-        </div>
-        <div class="contact-text">Report Bugs: <a href="mailto:andy64lolxd@gmail.com">andy64lolxd@gmail.com</a></div>
-        <button id="credits-back-button">Go Back</button>
-    </div>
-
-    <script>
-        const playButton = document.getElementById('play-button');
-        const playButton2 = document.getElementById('play-button-2');
-        const creditsButton = document.getElementById('credits-button');
-        const discordButton = document.getElementById('discord-button');
-        const youtubeButton = document.getElementById('youtube-button');
-        const embedContainer = document.getElementById('embed-container');
-        const creditsContainer = document.getElementById('credits-container');
-        const backButton = document.getElementById('back-button');
-        const creditsBackButton = document.getElementById('credits-back-button');
-        const scratchEmbed = document.getElementById('scratch-embed');
-
-        playButton.addEventListener('click', () => {
-            hideButtons();
-            embedContainer.style.display = 'flex';
-            embedContainer.style.flexDirection = 'column';
-            embedContainer.style.alignItems = 'center';
-            scratchEmbed.src = "https://scratch.mit.edu/projects/1097493338/embed";
-        });
-
-        playButton2.addEventListener('click', () => {
-            hideButtons();
-            embedContainer.style.display = 'flex';
-            embedContainer.style.flexDirection = 'column';
-            embedContainer.style.alignItems = 'center';
-            scratchEmbed.src = "https://scratch.mit.edu/projects/1111248213/embed";
-        });
-
-        creditsButton.addEventListener('click', () => {
-            hideButtons();
-            creditsContainer.style.display = 'block';
-        });
-
-        backButton.addEventListener('click', () => {
-            embedContainer.style.display = 'none';
-            scratchEmbed.src = '';
-            showButtons();
-        });
-
-        creditsBackButton.addEventListener('click', () => {
-            creditsContainer.style.display = 'none';
-            showButtons();
-        });
-
-        discordButton.addEventListener('click', () => {
-            window.open('https://discord.gg/vuhT7mpwAg', '_blank');
-        });
-
-        youtubeButton.addEventListener('click', () => {
-            window.open('https://www.youtube.com/@KaickES/featured', '_blank');
-        });
-
-        function hideButtons() {
-            playButton.style.display = 'none';
-            playButton2.style.display = 'none';
-            creditsButton.style.display = 'none';
-            discordButton.style.display = 'none';
-            youtubeButton.style.display = 'none';
-        }
-
-        function showButtons() {
-            playButton.style.display = 'block';
-            playButton2.style.display = 'block';
-            creditsButton.style.display = 'block';
-            discordButton.style.display = 'block';
-            youtubeButton.style.display = 'block';
-        }
-    </script>
 </body>
 </html>
