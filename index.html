@@ -96,7 +96,7 @@
             background-color: magenta;
         }
 
-        #embed-container, #credits-container {
+        #embed-container, #credits-container, #options-panel {
             display: none;
             margin-top: 20px;
             z-index: 10;
@@ -133,6 +133,18 @@
                 background-position: 0 0;
             }
         }
+
+        .options-panel {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        audio {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -141,11 +153,6 @@
     </audio>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const music = document.getElementById('background-music');
-            music.play();
-        });
-        
         function createBinaryRain() {
             const body = document.body;
             const chars = ['0', '1'];
@@ -171,7 +178,126 @@
     <button id="play-button">Play Project Hangout!!! 1.0 ver by Andyutlb</button>
     <button id="play-button-2">Play Catch the Mouse!!! by Andyutlb</button>
     <button id="credits-button" class="small-button">Credits</button>
+    <button id="options-button" class="small-button">Options</button>
     <button id="discord-button" class="small-button">Join Discord Server</button>
     <button id="youtube-button" class="small-button">Visit YouTube Channel</button>
+
+    <div id="embed-container">
+        <embed id="scratch-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
+        <button id="back-button">Go Back</button>
+    </div>
+
+    <div id="credits-container">
+        <div class="credits-text">
+            Thanks to<br>
+            <strong>Creator & Webmaster:</strong> Andy64 / Andyutlb<br>
+            <strong>Game Development:</strong> All members of the Andygame Scratch Studio<br>
+            (too many to name individually - thank you all!)<br>
+            <strong>CSS Scripts:</strong> Unknown64<br>
+            <strong>JavaScript Scripts:</strong> Andy64 / Andyutlb, Unknown64, 4l3x64, Pixel8bit<br>
+            <strong>HTML Scripts:</strong> Andy64 / Andyutlb, Pixel8bit
+        </div>
+        <div class="contact-text">Report Bugs: <a href="mailto:andy64lolxd@gmail.com">andy64lolxd@gmail.com</a></div>
+        <button id="credits-back-button">Go Back</button>
+    </div>
+
+    <div id="options-panel" class="options-panel">
+        <p>Background Music</p>
+        <button id="music-toggle">Enable Music</button>
+        <button id="options-back-button">Go Back</button>
+    </div>
+
+    <script>
+        const playButton = document.getElementById('play-button');
+        const playButton2 = document.getElementById('play-button-2');
+        const creditsButton = document.getElementById('credits-button');
+        const optionsButton = document.getElementById('options-button');
+        const discordButton = document.getElementById('discord-button');
+        const youtubeButton = document.getElementById('youtube-button');
+        const embedContainer = document.getElementById('embed-container');
+        const creditsContainer = document.getElementById('credits-container');
+        const optionsPanel = document.getElementById('options-panel');
+        const backButton = document.getElementById('back-button');
+        const creditsBackButton = document.getElementById('credits-back-button');
+        const optionsBackButton = document.getElementById('options-back-button');
+        const scratchEmbed = document.getElementById('scratch-embed');
+        const musicToggle = document.getElementById('music-toggle');
+        const backgroundMusic = document.getElementById('background-music');
+
+        playButton.addEventListener('click', () => {
+            scratchEmbed.src = "https://scratch.mit.edu/projects/1097493338/embed";
+            embedContainer.style.display = 'flex';
+            embedContainer.style.flexDirection = 'column';
+            embedContainer.style.alignItems = 'center';
+            playButton.style.display = 'none';
+            playButton2.style.display = 'none';
+        });
+
+        playButton2.addEventListener('click', () => {
+            scratchEmbed.src = "https://scratch.mit.edu/projects/1111248213/embed";
+            embedContainer.style.display = 'flex';
+            embedContainer.style.flexDirection = 'column';
+            embedContainer.style.alignItems = 'center';
+            playButton.style.display = 'none';
+            playButton2.style.display = 'none';
+        });
+
+        backButton.addEventListener('click', () => {
+            embedContainer.style.display = 'none';
+            playButton.style.display = 'block';
+            playButton2.style.display = 'block';
+            scratchEmbed.src = '';
+        });
+
+        creditsButton.addEventListener('click', () => {
+            creditsContainer.style.display = 'block';
+            playButton.style.display = 'none';
+            playButton2.style.display = 'none';
+            embedContainer.style.display = 'none';
+            optionsPanel.style.display = 'none';
+        });
+
+        creditsBackButton.addEventListener('click', () => {
+            creditsContainer.style.display = 'none';
+            playButton.style.display = 'block';
+            playButton2.style.display = 'block';
+        });
+
+        optionsButton.addEventListener('click', () => {
+            optionsPanel.style.display = 'block';
+            playButton.style.display = 'none';
+            playButton2.style.display = 'none';
+            embedContainer.style.display = 'none';
+            creditsContainer.style.display = 'none';
+        });
+
+        optionsBackButton.addEventListener('click', () => {
+            optionsPanel.style.display = 'none';
+            playButton.style.display = 'block';
+            playButton2.style.display = 'block';
+        });
+
+        discordButton.addEventListener('click', () => {
+            window.open("https://discord.gg/vuhT7mpwAg", "_blank");
+        });
+
+        youtubeButton.addEventListener('click', () => {
+            window.open("https://www.youtube.com/@KaickES/featured", "_blank");
+        });
+
+        let isMusicPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (!isMusicPlaying) {
+                backgroundMusic.play();
+                musicToggle.textContent = "Disable Music";
+                isMusicPlaying = true;
+            } else {
+                backgroundMusic.pause();
+                musicToggle.textContent = "Enable Music";
+                isMusicPlaying = false;
+            }
+        });
+    </script>
 </body>
 </html>
