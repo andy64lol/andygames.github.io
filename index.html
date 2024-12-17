@@ -7,218 +7,129 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
+            margin: 0; overflow: hidden; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(135deg, #000033, #000, #800080, #00FFFF);
-            background-size: 400% 400%;
-            animation: gradient 10s ease infinite;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-size: 400% 400%; animation: gradient 10s ease infinite;
             font-family: 'Orbitron', sans-serif;
-            overflow: hidden;
-            color: white;
+            cursor: url('http://www.rw-designer.com/cursor-extern.php?id=218715'), auto;
         }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes binaryFall {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(100vh); }
-        }
-
+        @keyframes gradient { 0%, 100% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} }
+        @keyframes binaryFall { from {transform: translateY(-100%);} to {transform: translateY(100vh);} }
+        
         .binary {
-            position: absolute;
-            top: -10%;
-            color: white;
-            font-size: 1.2rem;
-            font-family: monospace;
-            animation: binaryFall linear infinite;
-            white-space: nowrap;
+            position: absolute; top: -10%; left: calc(100% * var(--left));
+            color: rgba(255, 255, 255, 0.8); font-family: monospace; animation: binaryFall linear infinite;
+            animation-duration: calc(3s + var(--speed)); font-size: 1.2rem;
         }
-
-        .title {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            animation: fadeIn 2s ease-in-out forwards;
+        
+        .text-box, button, #embed-container, #credits-container, #options-panel {
+            text-align: center; margin-top: 10px;
+            background: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 10px; color: white;
         }
-
-        .subtitle {
-            font-size: 2rem;
-            color: cyan;
-            animation: fadeIn 2s ease-in-out forwards;
+        .text {
+            font-size: 3rem; background: linear-gradient(90deg, cyan, magenta); -webkit-background-clip: text; color: transparent;
+            animation: showText 3s ease-in-out;
         }
-
+        @keyframes showText {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
         button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, cyan, magenta);
-            color: white;
-            border: 2px solid white;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s, color 0.3s;
+            margin: 5px; padding: 10px 20px; border: none; background: cyan; cursor: pointer; transition: 0.3s; font-size: 1rem;
+            color: white; -webkit-text-stroke: 1px black; /* White text with black border */
         }
-
-        button:hover {
-            background: linear-gradient(135deg, magenta, cyan);
-            color: black;
-            border: 2px solid black;
+        button:hover { background: magenta; }
+        
+        #credits-container p {
+            margin: 10px 0; font-size: 1rem; color: white;
         }
-
-        #embed-container, #credits-container {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        iframe {
-            margin: 20px;
-            border: none;
-        }
-
-        .credits {
-            font-size: 1.2rem;
-            white-space: pre-wrap;
-            text-align: center;
-        }
-
-        .music-settings {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background: black;
-            border: 2px solid white;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        #credits-container h3 {
+            margin-bottom: 5px; color: cyan;
         }
     </style>
 </head>
 <body>
-    <script>
-        // Binary rain creation
-        function createBinaryRain() {
-            const body = document.body;
-            const chars = ['0', '1'];
-
-            for (let i = 0; i < 200; i++) {
-                const span = document.createElement('span');
-                span.className = 'binary';
-                span.textContent = chars[Math.floor(Math.random() * chars.length)];
-                span.style.left = Math.random() * 100 + 'vw';
-                span.style.animationDuration = (Math.random() * 5 + 3) + 's';
-                span.style.animationDelay = Math.random() * 10 + 's';
-                body.appendChild(span);
-            }
-        }
-        createBinaryRain();
-    </script>
-
-    <div class="title">YOU'RE IN...</div>
-    <div class="subtitle">Andygames</div>
-
-    <!-- Main Buttons -->
-    <button onclick="loadGame('https://scratch.mit.edu/projects/1097493338/embed')">Play Project Hangout!!! 1.0 ver by Andyutlb</button>
-    <button onclick="loadGame('https://scratch.mit.edu/projects/1111248213/embed')">Play Catch the Mouse!!! by Andyutlb</button>
-    <button onclick="loadGame('https://scratch.mit.edu/projects/1095415992/embed')">Play Guess Hidden Number to Escape</button>
-    <button onclick="loadGame('https://scratch.mit.edu/projects/922949387/embed')">(Discontinued) 3D Maze!!!</button>
-    <button onclick="showCredits()">Credits</button>
-
-    <!-- Embedded Game Container -->
-    <div id="embed-container">
-        <iframe id="scratch-embed" width="485" height="402" allowfullscreen></iframe>
-        <br>
-        <button onclick="goBack()">Go Back</button>
-    </div>
-
-    <!-- Credits Container -->
-    <div id="credits-container">
-        <div class="credits">
-Thanks to
-
-Creator & Webmaster:
-Andy64 / Andyutlb
-
-Game Development:
-All members of the Andygame Scratch Studio
-(too many to name individually - thank you all!)
-
-CSS Scripts:
-Unknown64
-
-JavaScript Scripts:
-Andy64 / Andyutlb, Unknown64, 4l3x64, Pixel8bit
-
-HTML Scripts:
-Andy64 / Andyutlb, Pixel8bit
-        </div>
-        <button onclick="goBack()">Go Back</button>
-    </div>
-
-    <!-- Music Settings -->
-    <button class="music-settings" onclick="toggleMusic()">Music: Play/Pause</button>
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
+    <!-- Music -->
+    <audio id="background-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Title and Buttons -->
+    <div class="text-box">
+        <div class="text">YOU'RE IN... Andygames</div>
+    </div>
+    <button id="play1">Play Hangout 1.0</button>
+    <button id="play2">Play Catch the Mouse</button>
+    <button id="credits">Credits</button>
+    <button id="options">Options</button>
+
+    <!-- Containers -->
+    <div id="embed-container" style="display: none;">
+        <embed id="game-embed" src="" width="485" height="402"></embed>
+        <button id="back">Back</button>
+    </div>
+    <div id="credits-container" style="display: none;">
+        <h3>Thanks to</h3>
+        <p><strong>Creator & Webmaster:</strong><br> Andy64 / Andyutlb</p>
+        <p><strong>Game Development:</strong><br> All members of the Andygame Scratch Studio<br>(too many to name individually - thank you all!)</p>
+        <p><strong>CSS Scripts:</strong><br> Unknown64</p>
+        <p><strong>JavaScript Scripts:</strong><br> Andy64 / Andyutlb, Unknown64, 4l3x64, Pixel8bit</p>
+        <p><strong>HTML Scripts:</strong><br> Andy64 / Andyutlb, Pixel8bit</p>
+        <button id="credits-back">Back</button>
+    </div>
+    <div id="options-panel" style="display: none;">
+        <button id="music-toggle">Enable Music</button>
+        <button id="options-back">Back</button>
+    </div>
+
+    <!-- Binary Rain -->
     <script>
-        const embedContainer = document.getElementById('embed-container');
-        const scratchEmbed = document.getElementById('scratch-embed');
-        const creditsContainer = document.getElementById('credits-container');
-        const music = document.getElementById('bg-music');
-
-        function loadGame(url) {
-            scratchEmbed.src = url;
-            embedContainer.style.display = 'block';
-            creditsContainer.style.display = 'none';
-            hideButtons();
+        for (let i = 0; i < 100; i++) {
+            const binary = document.createElement('span');
+            binary.className = 'binary';
+            binary.style.setProperty('--left', Math.random());
+            binary.style.setProperty('--speed', Math.random() * 5 + 's');
+            binary.textContent = Math.random() < 0.5 ? '0' : '1';
+            document.body.appendChild(binary);
         }
 
-        function showCredits() {
-            creditsContainer.style.display = 'block';
-            embedContainer.style.display = 'none';
-            hideButtons();
-        }
+        const elements = {
+            play1: document.getElementById('play1'),
+            play2: document.getElementById('play2'),
+            credits: document.getElementById('credits'),
+            options: document.getElementById('options'),
+            back: document.getElementById('back'),
+            creditsBack: document.getElementById('credits-back'),
+            optionsBack: document.getElementById('options-back'),
+            musicToggle: document.getElementById('music-toggle'),
+            embed: document.getElementById('embed-container'),
+            creditsContainer: document.getElementById('credits-container'),
+            optionsPanel: document.getElementById('options-panel'),
+            gameEmbed: document.getElementById('game-embed'),
+            music: document.getElementById('background-music'),
+        };
 
-        function goBack() {
-            embedContainer.style.display = 'none';
-            creditsContainer.style.display = 'none';
-            showButtons();
-        }
+        let musicPlaying = false;
+        elements.musicToggle.onclick = () => {
+            musicPlaying = !musicPlaying;
+            elements.musicToggle.textContent = musicPlaying ? 'Disable Music' : 'Enable Music';
+            musicPlaying ? elements.music.play() : elements.music.pause();
+        };
 
-        function hideButtons() {
-            document.querySelectorAll('button').forEach(button => button.style.display = 'none');
-            document.querySelector('.music-settings').style.display = 'block';
-        }
-
-        function showButtons() {
-            document.querySelectorAll('button').forEach(button => button.style.display = 'inline-block');
-        }
-
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
+        const show = (container, src = '') => {
+            [elements.embed, elements.creditsContainer, elements.optionsPanel].forEach(e => e.style.display = 'none');
+            container.style.display = 'block';
+            if (src) elements.gameEmbed.src = src;
+        };
+        
+        elements.play1.onclick = () => show(elements.embed, 'https://scratch.mit.edu/projects/1097493338/embed');
+        elements.play2.onclick = () => show(elements.embed, 'https://scratch.mit.edu/projects/1111248213/embed');
+        elements.credits.onclick = () => show(elements.creditsContainer);
+        elements.options.onclick = () => show(elements.optionsPanel);
+        [elements.back, elements.creditsBack, elements.optionsBack].forEach(btn => btn.onclick = () => show({ style: { display: 'none' } }));
     </script>
 </body>
 </html>
+
