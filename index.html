@@ -64,6 +64,7 @@
     <button id="play2">Play Catch the Mouse</button>
     <button id="credits">Credits</button>
     <button id="options">Options</button>
+<button id="play-button-catch-mouse">Play Catch the Mouse!!! by Andyutlb</button>
 
     <!-- Containers -->
     <div id="embed-container" style="display: none;">
@@ -83,6 +84,10 @@
         <button id="music-toggle">Enable Music</button>
         <button id="options-back">Back</button>
     </div>
+   <div id="embed-container" style="display: none;">
+    <embed id="scratch-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
+    <button id="back-button">Go Back</button>
+</div>
 
     <!-- Binary Rain -->
     <script>
@@ -129,6 +134,27 @@
         elements.credits.onclick = () => show(elements.creditsContainer);
         elements.options.onclick = () => show(elements.optionsPanel);
         [elements.back, elements.creditsBack, elements.optionsBack].forEach(btn => btn.onclick = () => show({ style: { display: 'none' } }));
+        const playButtonCatchMouse = document.getElementById('play-button-catch-mouse');
+const embedContainer = document.getElementById('embed-container');
+const scratchEmbed = document.getElementById('scratch-embed');
+const backButton = document.getElementById('back-button');
+
+// Event listener for the Catch the Mouse button
+playButtonCatchMouse.addEventListener('click', () => {
+    scratchEmbed.src = "https://scratch.mit.edu/projects/1111248213/embed";
+    embedContainer.style.display = 'flex';
+    embedContainer.style.flexDirection = 'column';
+    embedContainer.style.alignItems = 'center';
+    playButtonCatchMouse.style.display = 'none';
+});
+
+// Event listener for the back button to return to the main screen
+backButton.addEventListener('click', () => {
+    embedContainer.style.display = 'none';
+    playButtonCatchMouse.style.display = 'block';
+    scratchEmbed.src = ''; // Clear the embed src to stop the game
+});
+
     </script>
 </body>
 </html>
