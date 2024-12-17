@@ -16,7 +16,7 @@
         }
         @keyframes gradient { 0%, 100% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} }
         @keyframes binaryFall { from {transform: translateY(-100%);} to {transform: translateY(100vh);} }
-        
+
         .binary {
             position: absolute; top: -10%; left: calc(100% * var(--left));
             color: rgba(255, 255, 255, 0.8); font-family: monospace; animation: binaryFall linear infinite;
@@ -35,7 +35,7 @@
             0% { opacity: 0; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1); }
         }
-        
+
         button {
             margin: 5px; padding: 10px 20px; border: none; background: cyan; cursor: pointer; transition: 0.3s; font-size: 1rem;
             color: white; -webkit-text-stroke: 1px black;
@@ -56,6 +56,8 @@
     </div>
     <button id="play1">Play Hangout 1.0</button>
     <button id="play2">Play Catch the Mouse</button>
+    <button id="play3">Play 3D Maze</button>
+    <button id="play4">Play Horror Guess Number</button>
     <button id="credits">Credits</button>
     <button id="options">Options</button>
 
@@ -67,7 +69,7 @@
     <div id="credits-container" style="display: none;">
         <h3>Thanks to</h3>
         <p><strong>Creator & Webmaster:</strong><br> Andy64 / Andyutlb</p>
-        <p><strong>Game Development:</strong><br> All members of the Andygame Scratch Studio<br>(too many to name individually - thank you all!)</p>
+        <p><strong>Game Development:</strong><br> All members of the Andygame Scratch Studio</p>
         <p><strong>CSS Scripts:</strong><br> Unknown64</p>
         <p><strong>JavaScript Scripts:</strong><br> Andy64 / Andyutlb, Unknown64, 4l3x64, Pixel8bit</p>
         <p><strong>HTML Scripts:</strong><br> Andy64 / Andyutlb, Pixel8bit</p>
@@ -92,6 +94,8 @@
         const elements = {
             play1: document.getElementById('play1'),
             play2: document.getElementById('play2'),
+            play3: document.getElementById('play3'),
+            play4: document.getElementById('play4'),
             credits: document.getElementById('credits'),
             options: document.getElementById('options'),
             backButton: document.getElementById('back-button'),
@@ -120,13 +124,17 @@
 
         elements.play1.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/1097493338/embed');
         elements.play2.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/1111248213/embed');
+        elements.play3.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/922949387/embed');
+        elements.play4.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/1095415992/embed');
         elements.credits.onclick = () => show(elements.creditsContainer);
         elements.options.onclick = () => show(elements.optionsPanel);
+
         [elements.backButton, elements.creditsBack, elements.optionsBack].forEach(btn => 
-            btn.onclick = () => show({ style: { display: 'none' } })
+            btn.onclick = () => show(document.querySelector('.text-box'))
         );
     </script>
 </body>
 </html>
+
 
 
