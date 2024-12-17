@@ -38,25 +38,19 @@
         
         button {
             margin: 5px; padding: 10px 20px; border: none; background: cyan; cursor: pointer; transition: 0.3s; font-size: 1rem;
-            color: white; -webkit-text-stroke: 1px black; /* White text with black border */
+            color: white; -webkit-text-stroke: 1px black;
         }
         button:hover { background: magenta; }
         
-        #credits-container p {
-            margin: 10px 0; font-size: 1rem; color: white;
-        }
-        #credits-container h3 {
-            margin-bottom: 5px; color: cyan;
-        }
+        #credits-container p { margin: 10px 0; font-size: 1rem; }
+        #credits-container h3 { margin-bottom: 5px; color: cyan; }
     </style>
 </head>
 <body>
-    <!-- Music -->
     <audio id="background-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Title and Buttons -->
     <div class="text-box">
         <div class="text">YOU'RE IN... Andygames</div>
     </div>
@@ -64,13 +58,12 @@
     <button id="play2">Play Catch the Mouse</button>
     <button id="credits">Credits</button>
     <button id="options">Options</button>
-<button id="play-button-catch-mouse">Play Catch the Mouse!!! by Andyutlb</button>
 
-    <!-- Containers -->
     <div id="embed-container" style="display: none;">
-        <embed id="game-embed" src="" width="485" height="402"></embed>
-        <button id="back">Back</button>
+        <embed id="game-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
+        <button id="back-button">Go Back</button>
     </div>
+
     <div id="credits-container" style="display: none;">
         <h3>Thanks to</h3>
         <p><strong>Creator & Webmaster:</strong><br> Andy64 / Andyutlb</p>
@@ -80,16 +73,12 @@
         <p><strong>HTML Scripts:</strong><br> Andy64 / Andyutlb, Pixel8bit</p>
         <button id="credits-back">Back</button>
     </div>
+
     <div id="options-panel" style="display: none;">
         <button id="music-toggle">Enable Music</button>
         <button id="options-back">Back</button>
     </div>
-   <div id="embed-container" style="display: none;">
-    <embed id="scratch-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
-    <button id="back-button">Go Back</button>
-</div>
 
-    <!-- Binary Rain -->
     <script>
         for (let i = 0; i < 100; i++) {
             const binary = document.createElement('span');
@@ -105,11 +94,11 @@
             play2: document.getElementById('play2'),
             credits: document.getElementById('credits'),
             options: document.getElementById('options'),
-            back: document.getElementById('back'),
+            backButton: document.getElementById('back-button'),
             creditsBack: document.getElementById('credits-back'),
             optionsBack: document.getElementById('options-back'),
             musicToggle: document.getElementById('music-toggle'),
-            embed: document.getElementById('embed-container'),
+            embedContainer: document.getElementById('embed-container'),
             creditsContainer: document.getElementById('credits-container'),
             optionsPanel: document.getElementById('options-panel'),
             gameEmbed: document.getElementById('game-embed'),
@@ -124,38 +113,20 @@
         };
 
         const show = (container, src = '') => {
-            [elements.embed, elements.creditsContainer, elements.optionsPanel].forEach(e => e.style.display = 'none');
+            [elements.embedContainer, elements.creditsContainer, elements.optionsPanel].forEach(e => e.style.display = 'none');
             container.style.display = 'block';
             if (src) elements.gameEmbed.src = src;
         };
-        
-        elements.play1.onclick = () => show(elements.embed, 'https://scratch.mit.edu/projects/1097493338/embed');
-        elements.play2.onclick = () => show(elements.embed, 'https://scratch.mit.edu/projects/1111248213/embed');
+
+        elements.play1.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/1097493338/embed');
+        elements.play2.onclick = () => show(elements.embedContainer, 'https://scratch.mit.edu/projects/1111248213/embed');
         elements.credits.onclick = () => show(elements.creditsContainer);
         elements.options.onclick = () => show(elements.optionsPanel);
-        [elements.back, elements.creditsBack, elements.optionsBack].forEach(btn => btn.onclick = () => show({ style: { display: 'none' } }));
-        const playButtonCatchMouse = document.getElementById('play-button-catch-mouse');
-const embedContainer = document.getElementById('embed-container');
-const scratchEmbed = document.getElementById('scratch-embed');
-const backButton = document.getElementById('back-button');
-
-// Event listener for the Catch the Mouse button
-playButtonCatchMouse.addEventListener('click', () => {
-    scratchEmbed.src = "https://scratch.mit.edu/projects/1111248213/embed";
-    embedContainer.style.display = 'flex';
-    embedContainer.style.flexDirection = 'column';
-    embedContainer.style.alignItems = 'center';
-    playButtonCatchMouse.style.display = 'none';
-});
-
-// Event listener for the back button to return to the main screen
-backButton.addEventListener('click', () => {
-    embedContainer.style.display = 'none';
-    playButtonCatchMouse.style.display = 'block';
-    scratchEmbed.src = ''; // Clear the embed src to stop the game
-});
-
+        [elements.backButton, elements.creditsBack, elements.optionsBack].forEach(btn => 
+            btn.onclick = () => show({ style: { display: 'none' } })
+        );
     </script>
 </body>
 </html>
+
 
