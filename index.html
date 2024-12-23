@@ -137,6 +137,7 @@
     <button id="play4">Play Horror Guess Number</button>
     <button id="credits">Credits</button>
     <button id="options">Options</button>
+    <button id="redirect">More games!</button>
 
     <div id="embed-container">
         <embed id="game-embed" src="" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></embed>
@@ -167,6 +168,7 @@
             play4: document.getElementById('play4'),
             credits: document.getElementById('credits'),
             options: document.getElementById('options'),
+            redirect: document.getElementById('redirect'),
             backButton: document.getElementById('back-button'),
             creditsBack: document.getElementById('credits-back'),
             optionsBack: document.getElementById('options-back'),
@@ -200,6 +202,10 @@
         [elements.backButton, elements.creditsBack, elements.optionsBack].forEach(btn => 
             btn.onclick = () => show({ style: { display: 'none' } })
         );
+
+        elements.redirect.onclick = () => {
+            window.location.href = 'https://www.google.com'; // Replace with your desired URL
+        };
     </script>
 </body>
 </html>
